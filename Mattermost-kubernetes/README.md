@@ -22,6 +22,12 @@
 
 ## 2.mattermost construcyion
 
+Mattermost construction with kubernetes.
+
+### 2-1.Construction of NFS Server (NFS server side)
+
+Installing neccessary packages of nfs.
+
 Editing now...
 
 ## Reference material
