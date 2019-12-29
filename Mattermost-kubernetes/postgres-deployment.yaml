@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: mattermost-ns
+  labels:
+    app: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      # optional persistent storage
+      securityContext:
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
+      containers:
+      - image: postgres:11
+        name: postgres
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5432
+          name: postgres
+        envFrom:
+          - configMapRef:
+              name: postgres-config
+        volumeMounts:
+        - name: mattermost-postgres-pv
+          mountPath: /var/lib/postgresql/data
+      initContainers:
+        - name: pgsql-data-permission-fix
+          image: busybox
+          command: ["sh", "-c", "chown -R 2000:2000 /mattermost/data", "chgrp 2000 /mattermost/data"]
+          volumeMounts:
+            - name: mattermost-postgres-pv
+              mountPath: /mattermost/data
+      volumes:
+      - name: mattermost-postgres-pv
+        persistentVolumeClaim:
+          claimName: mattermost-postgres-pvc
