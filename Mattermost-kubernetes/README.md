@@ -28,6 +28,31 @@ Mattermost construction with kubernetes.
 
 Installing neccessary packages of nfs.
 
+```
+# yum -y install nfs-utils
+```
+
+(/etc/exports)
+
+```
+/mnt/mattermost 172.16.10.0/24(rw,async,no_root_squash)
+```
+
+Release service of firewall.
+
+```
+# firewall-cmd --add-service=nfs <--nfs4の場合
+# firewall-cmd --runtime-to-permanent
+# firewall-cmd --reload
+```
+
+rancher of nfs server
+
+```
+# systemctl enable rpcbind nfs-server
+# systemctl start rpcbind nfs-server
+``
+
 Editing now...
 
 ## Reference material
