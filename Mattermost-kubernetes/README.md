@@ -52,7 +52,40 @@ rancher of nfs server
 ```
 # systemctl enable rpcbind nfs-server
 # systemctl start rpcbind nfs-server
-``
+```
+
+### 2-2.Prepare of NFS client (kubernetes sdie)
+
+Installing to client side neccessary packages of nfs.
+
+```terminal
+# yum -y install nfs-utils
+# mkdir -p /mnt/mattermost/postgres
+```
+
+Grant permissions to the directory.
+
+```terminal
+# chmod 777 /mnt/mattermost
+```
+
+Mount to client side.
+
+```teminal
+# mount -t nfs (nfs server 'IP address' or 'hostname'):/mnt/matetrmost /mnt/mattermost
+```
+
+Edit /etc/fstab.
+(/etc/fstab)
+
+```
+/dev/mapper/centos-root /                       xfs     defaults        1 1
+UUID=a18716b4-cd67-4aec-af91-51be7bce2a0b /boot xfs     defaults        1 2
+# /dev/mapper/centos-swap swap                    swap    defaults        0 0
+
+(nfs server 'IP address' of 'hostname'):/mnt/mattermost  /mnt/mattermost                   nfs     defaults        0 0
+```
+
 
 Editing now...
 
