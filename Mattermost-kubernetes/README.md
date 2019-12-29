@@ -86,6 +86,12 @@ UUID=a18716b4-cd67-4aec-af91-51be7bce2a0b /boot xfs     defaults        1 2
 (nfs server 'IP address' of 'hostname'):/mnt/mattermost  /mnt/mattermost                   nfs     defaults        0 0
 ```
 
+### 2-3.Prepare for kubernetes
+
+Please prepare the kubernetes cluster by yourself.
+
+### 2.4.Prepare for DB
+
 
 Editing now...
 
