@@ -32,6 +32,7 @@ Installing neccessary packages of nfs.
 # yum -y install nfs-utils
 ```
 
+Edit /etc/exports.
 (/etc/exports)
 
 ```
