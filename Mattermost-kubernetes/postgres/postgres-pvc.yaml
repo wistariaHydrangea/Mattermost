@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mattermost-postgres-pvc
+  namespace: mattermost-ns
+  labels:
+    app: postgres
+  annotations:
+    # optional persistent storage
+    volume.beta.kubernetes.io/mount-options: "uid=2000,gid=2000"
+    volume.beta.kubernetes.io/storage-class: "nfs"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  selector:
+    matchLabels:
+      name: mattermost-postgres-pv
